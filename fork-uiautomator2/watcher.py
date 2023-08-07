@@ -16,7 +16,7 @@ from uiautomator2.xpath import XPath
 
 from .utils import inject_call
 
-logger = logging.getLogger("uiautomator2")
+logger = logging.getLogger("fork-uiautomator2")
 
 
 def _callback_click(el):
@@ -25,7 +25,7 @@ def _callback_click(el):
 
 
 class WatchContext:
-    def __init__(self, d: "uiautomator2.Device", builtin: bool = False):
+    def __init__(self, d: "fork-uiautomator2.Device", builtin: bool = False):
         self._d = d
         self._callbacks = OrderedDict()
         self.__xpath_list = []
@@ -146,7 +146,7 @@ class WatchContext:
 
 
 class Watcher():
-    def __init__(self, d: "uiautomator2.Device"):
+    def __init__(self, d: "fork-uiautomator2.Device"):
         self._d = d
         self._watchers = []
 
@@ -326,7 +326,7 @@ class XPathWatcher():
             "search", "enter", "delete", "del", "recent", "volume_up",
             "menu", "volume_down", "volume_mute", "camera", "power")
         """
-        def _inner_press(d: "uiautomator2.Device"):
+        def _inner_press(d: "fork-uiautomator2.Device"):
             d.press(key)
 
         self.call(_inner_press)

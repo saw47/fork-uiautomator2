@@ -1,8 +1,8 @@
 # coding: utf-8
 #
 """
-import uiautomator2 as u2
-import uiautomator2.ext.ocr as ocr
+import fork-uiautomator2 as u2
+import fork-uiautomator2.ext.ocr as ocr
 
 u2.plugin_add("ocr", ocr.OCR)
 
@@ -24,7 +24,7 @@ class OCR(object):
     def __init__(self, d):
         """
         Args:
-            d: uiautomator2 instance
+            d: fork-uiautomator2 instance
         """
         self._d = d
         if not API:

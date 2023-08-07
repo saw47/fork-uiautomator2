@@ -76,7 +76,7 @@ WAIT_FOR_DEVICE_TIMEOUT = int(os.getenv("WAIT_FOR_DEVICE_TIMEOUT", 20))
 
 log_format = '%(color)s[%(levelname)1.1s %(asctime)s %(module)s:%(lineno)d]%(end_color)s [pid:%(process)d] %(message)s'
 formatter = logzero.LogFormatter(fmt=log_format)
-logger = setup_logger("uiautomator2", level=logging.DEBUG, formatter=formatter)
+logger = setup_logger("fork-uiautomator2", level=logging.DEBUG, formatter=formatter)
 _mswindows = (os.name == "nt")
 
 
@@ -256,7 +256,7 @@ class _BaseClient(object):
         # setup logger
         log_format = f'%(color)s[%(levelname)1.1s %(asctime)s %(module)s:%(lineno)d]%(end_color)s [pid:%(process)d] [{self._serial}] %(message)s'
         formatter = logzero.LogFormatter(fmt=log_format)
-        self._logger = setup_logger(name="uiautomator2.client", level=logging.DEBUG, formatter=formatter)
+        self._logger = setup_logger(name="fork-uiautomator2.client", level=logging.DEBUG, formatter=formatter)
         
         filelock_path = os.path.expanduser("~/.uiautomator2/filelocks/") + base64.urlsafe_b64encode(self._serial.encode('utf-8')).decode('utf-8') + ".lock"
         os.makedirs(os.path.dirname(filelock_path), exist_ok=True)
@@ -674,7 +674,7 @@ class _BaseClient(object):
             
         self.uiautomator.start()
 
-        # wait until uiautomator2 service is working
+        # wait until fork-uiautomator2 service is working
         time.sleep(.5)
         deadline = time.time() + 40.0  # in vivo-Y67, launch timeout 24s
         flow_window_showed = False

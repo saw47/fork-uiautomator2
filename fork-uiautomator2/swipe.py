@@ -8,7 +8,7 @@ class SwipeExt(object):
     def __init__(self, d):
         """
         Args：
-            d (uiautomator2.Device)
+            d (fork-uiautomator2.Device)
         """
         self._d = d
 

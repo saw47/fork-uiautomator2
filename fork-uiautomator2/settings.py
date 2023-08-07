@@ -7,7 +7,7 @@ import pprint
 from typing import Any
 
 
-logger = logging.getLogger("uiautomator2")
+logger = logging.getLogger("fork-uiautomator2")
 
 class Settings(object):
     """ 赋值时会检查类型 """

@@ -137,7 +137,7 @@ def cmd_doctor(args):
     
 
 def cmd_version(args):
-    print("uiautomator2 version: %s" % __version__)
+    print("fork-uiautomator2 version: %s" % __version__)
 
 
 def cmd_console(args):
