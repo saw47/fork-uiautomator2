@@ -20,7 +20,9 @@ from uiautomator2.utils import natualsize
 
 appdir = os.path.join(os.path.expanduser("~"), '.fork-uiautomator2')
 
-GITHUB_BASEURL = "https://github.com/openatx"
+OPENATX_URL: str = "https://github.com/openatx"
+SAW47_URL: str = "https://github.com/saw47"
+GITHUB_BASEURL = SAW47_URL
 FORK: str = "fork-"
 
 class DownloadBar(progress.bar.PixelBar):
