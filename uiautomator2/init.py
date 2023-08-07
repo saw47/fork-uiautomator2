@@ -21,7 +21,7 @@ from uiautomator2.utils import natualsize
 appdir = os.path.join(os.path.expanduser("~"), '.uiautomator2')
 
 GITHUB_BASEURL = "https://github.com/openatx"
-
+FORK: str = "fork-"
 
 class DownloadBar(progress.bar.PixelBar):
     message = "Downloading"
@@ -44,6 +44,7 @@ def gen_cachepath(url: str) -> str:
         filename.replace(" ", "_") + "-" +
         hashlib.sha224(url.encode()).hexdigest()[:10], filename)
     return storepath
+
 
 def cache_download(url, filename=None, timeout=None, storepath=None, logger=logger):
     """ return downloaded filepath """
@@ -68,7 +69,7 @@ def cache_download(url, filename=None, timeout=None, storepath=None, logger=logg
         'Connection': 'keep-alive',
         'Origin': 'https://github.com',
         'User-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'
-    } # yapf: disable
+    }  # yapf: disable
     r = requests.get(url, stream=True, headers=headers, timeout=None)
     r.raise_for_status()
 
@@ -88,6 +89,7 @@ def cache_download(url, filename=None, timeout=None, storepath=None, logger=logg
                                         ".part")  # may raise FileNotFoundError
     shutil.move(storepath + '.part', storepath)
     return storepath
+
 
 def mirror_download(url: str, filename=None, logger: logging.Logger = logger):
     """
@@ -117,7 +119,7 @@ def app_uiautomator_apk_urls():
     ret = []
     for name in ["app-uiautomator.apk", "app-uiautomator-test.apk"]:
         ret.append((name, "".join([
-            GITHUB_BASEURL, "/android-uiautomator-server/releases/download/",
+            GITHUB_BASEURL, f"/{FORK}android-uiautomator-server/releases/download/",
             __apk_version__, "/", name
         ])))
     return ret
@@ -139,6 +141,7 @@ def parse_apk(path: str):
         "main_activity": main_activity,
     }
 
+
 class Initer():
     def __init__(self, device: adbutils.AdbDevice, loglevel=logging.DEBUG):
         d = self._device = device
@@ -149,7 +152,7 @@ class Initer():
         self.arch = d.getprop('ro.arch')
         self.abis = (d.getprop('ro.product.cpu.abilist').strip()
                      or self.abi).split(",")
-        
+
         self.__atx_listen_addr = "127.0.0.1:7912"
         self.logger = setup_logger(level=loglevel)
         # self.logger.debug("Initial device %s", device)
@@ -168,7 +171,7 @@ class Initer():
         return self._device.shell(args, timeout=60)
 
     @property
-    def jar_urls(self):
+    def jar_urls(self): # fork
         """
         Returns:
             iter([name, url], [name, url])
@@ -176,7 +179,7 @@ class Initer():
         for name in ['bundle.jar', 'uiautomator-stub.jar']:
             yield (name, "".join([
                 GITHUB_BASEURL,
-                "/android-uiautomator-jsonrpcserver/releases/download/",
+                f"/{FORK}android-uiautomator-jsonrpcserver/releases/download/",
                 __jar_version__, "/", name
             ]))
 
@@ -198,7 +201,7 @@ class Initer():
             raise Exception(
                 "arch(%s) need to be supported yet, please report an issue in github"
                 % self.abis)
-        return GITHUB_BASEURL + '/atx-agent/releases/download/%s/%s' % (
+        return GITHUB_BASEURL + f'/{FORK}atx-agent/releases/download/%s/%s' % (
             __atx_agent_version__, name.format(v=__atx_agent_version__))
 
     @property
@@ -208,7 +211,7 @@ class Initer():
         only got abi: armeabi-v7a and arm64-v8a
         """
         base_url = GITHUB_BASEURL + \
-            "/stf-binaries/raw/0.3.0/node_modules/@devicefarmer/minicap-prebuilt/prebuilt/"
+                   f"/{FORK}stf-binaries/raw/0.3.0/node_modules/@devicefarmer/minicap-prebuilt/prebuilt/"
         sdk = self.sdk
         yield base_url + self.abi + "/lib/android-" + sdk + "/minicap.so"
         yield base_url + self.abi + "/bin/minicap"
@@ -216,7 +219,7 @@ class Initer():
     @property
     def minitouch_url(self):
         return ''.join([
-            GITHUB_BASEURL + "/stf-binaries",
+            GITHUB_BASEURL + f"/{FORK}stf-binaries",
             "/raw/0.3.0/node_modules/@devicefarmer/minitouch-prebuilt/prebuilt/",
             self.abi + "/bin/minitouch"
         ])
@@ -345,7 +348,7 @@ class Initer():
         if self.is_atx_agent_outdated():
             self.logger.info("Install atx-agent %s", __atx_agent_version__)
             self.push_url(self.atx_agent_url, tgz=True, extract_name="atx-agent")
-        
+
         self.shell(self.atx_agent_path, 'server', '--nouia', '-d', "--addr", self.__atx_listen_addr)
         self.logger.info("Check atx-agent version")
         self.check_atx_agent_version()
