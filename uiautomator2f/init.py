@@ -21,6 +21,7 @@ from uiautomator2f.utils import natualsize
 appdir = os.path.join(os.path.expanduser("~"), '.uiautomator2f')
 
 GITHUB_BASEURL = "https://github.com/openatx"
+GITHUB_FORK_URL = "https://github.com/saw47"
 
 class DownloadBar(progress.bar.PixelBar):
     message = "Downloading"
@@ -97,7 +98,6 @@ def mirror_download(url: str, filename=None, logger: logging.Logger = logger):
     storepath = gen_cachepath(url)
     if not filename:
         filename = os.path.basename(url)
-
     # disable mirror
     """
     github_host = "https://github.com"
@@ -114,7 +114,6 @@ def mirror_download(url: str, filename=None, logger: logging.Logger = logger):
                 AssertionError) as e:
             logger.debug("download error from mirror(%s), use origin source", e)
     """
-
     return cache_download(url, filename, storepath=storepath, logger=logger)
 
 
@@ -122,7 +121,7 @@ def app_uiautomator_apk_urls():
     ret = []
     for name in ["app-uiautomator.apk", "app-uiautomator-test.apk"]:
         ret.append((name, "".join([
-            GITHUB_BASEURL, f"/{FORK}android-uiautomator-server/releases/download/",
+            GITHUB_BASEURL, f"/android-uiautomator-server/releases/download/",
             __apk_version__, "/", name
         ])))
     return ret
@@ -182,7 +181,7 @@ class Initer():
         for name in ['bundle.jar', 'uiautomator-stub.jar']:
             yield (name, "".join([
                 GITHUB_BASEURL,
-                f"/{FORK}android-uiautomator-jsonrpcserver/releases/download/",
+                f"/android-uiautomator-jsonrpcserver/releases/download/",
                 __jar_version__, "/", name
             ]))
 
@@ -204,7 +203,7 @@ class Initer():
             raise Exception(
                 "arch(%s) need to be supported yet, please report an issue in github"
                 % self.abis)
-        return GITHUB_BASEURL + f'/{FORK}atx-agent/releases/download/%s/%s' % (
+        return GITHUB_BASEURL + f'/atx-agent/releases/download/%s/%s' % (
             __atx_agent_version__, name.format(v=__atx_agent_version__))
 
     @property
@@ -213,19 +212,20 @@ class Initer():
         binary from https://github.com/openatx/stf-binaries
         only got abi: armeabi-v7a and arm64-v8a
         """
-        base_url = GITHUB_BASEURL + \
-                   f"/{FORK}stf-binaries/raw/0.3.0/node_modules/@devicefarmer/minicap-prebuilt/prebuilt/"
+        # base_url = GITHUB_BASEURL + f"/stf-binaries/raw/0.3.0/node_modules/@devicefarmer/minicap-prebuilt/prebuilt/"
+        base_url = GITHUB_FORK_URL + \
+                   f"/fork-stf-binaries/tree/master/node_modules/%40devicefarmer/minicap-prebuilt/prebuilt/"
         sdk = self.sdk
         yield base_url + self.abi + "/lib/android-" + sdk + "/minicap.so"
         yield base_url + self.abi + "/bin/minicap"
 
+
     @property
     def minitouch_url(self):
-        return ''.join([
-            GITHUB_BASEURL + f"/{FORK}stf-binaries",
-            "/raw/0.3.0/node_modules/@devicefarmer/minitouch-prebuilt/prebuilt/",
+        return GITHUB_FORK_URL + \
+            f"/fork-stf-binaries/tree/master/node_modules/%40devicefarmer/minitouch-prebuilt/prebuilt/" + \
             self.abi + "/bin/minitouch"
-        ])
+
 
     @retry(tries=2, logger=logger)
     def push_url(self, url, dest=None, mode=0o755, tgz=False, extract_name=None):  # yapf: disable
