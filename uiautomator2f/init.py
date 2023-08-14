@@ -214,7 +214,7 @@ class Initer():
         """
         # base_url = GITHUB_BASEURL + f"/stf-binaries/raw/0.3.0/node_modules/@devicefarmer/minicap-prebuilt/prebuilt/"
         base_url = GITHUB_FORK_URL + \
-                   f"/fork-stf-binaries/tree/master/node_modules/%40devicefarmer/minicap-prebuilt/prebuilt/"
+                   f"/fork-stf-binaries/tree/master/node_modules/@devicefarmer/minicap-prebuilt/prebuilt/"
         sdk = self.sdk
         yield base_url + self.abi + "/lib/android-" + sdk + "/minicap.so"
         yield base_url + self.abi + "/bin/minicap"
@@ -223,7 +223,7 @@ class Initer():
     @property
     def minitouch_url(self):
         return GITHUB_FORK_URL + \
-            f"/fork-stf-binaries/tree/master/node_modules/%40devicefarmer/minitouch-prebuilt/prebuilt/" + \
+            f"/fork-stf-binaries/tree/master/node_modules/@devicefarmer/minitouch-prebuilt/prebuilt/" + \
             self.abi + "/bin/minitouch"
 
 
