@@ -15,8 +15,8 @@
 ## 示例
 
 ```python
-import uiautomator2 as u2
-import uiautomator2.ext.ocr.baiduOCR as ocr
+import uiautomator2f as u2
+import uiautomator2f.ext.ocr.baiduOCR as ocr
 
 APP_ID = '创建应用的APP_ID'
 API_KEY = '创建应用的API_KEY'

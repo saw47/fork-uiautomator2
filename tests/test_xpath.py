@@ -5,7 +5,7 @@ import threading
 from functools import partial
 from pprint import pprint
 
-import uiautomator2 as u2
+import uiautomator2f as u2
 import pytest
 
 

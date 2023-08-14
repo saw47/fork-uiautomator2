@@ -10,7 +10,7 @@ import imageio
 import numpy as np
 from websocket import create_connection
 
-import uiautomator2 as u2
+import uiautomator2f as u2
 
 
 def iter_image_from_minicap(uri):

@@ -66,8 +66,9 @@ CVHandler.template_threshold = 0.95
 
 > 一般来说，图像传输会在连接上设备开始传输，程序结束会自动关闭传输
 > 如果需要主动关闭，开启图像传输的话，可参考如下
+
 ```python
-import uiautomator2 as u2
+import uiautomator2f as u2
 from aircv import Aircv
 
 u2.plugin_register('aircv', Aircv)
@@ -85,27 +86,23 @@ d.ext_aircv.start_get_screen()
 # 示例
 
 ```python
-import uiautomator2 as u2
+import uiautomator2f as u2
 from aircv import Aircv
 
 u2.plugin_register('aircv', Aircv)
 d = u2.connect()
 
-
 # 判断是否存在
 d.ext_aircv.exists('tmp.jpg')
 d.ext_aircv.exists('tmp.jpg', timeout=60)  # 设置超时时间
-
 
 # 点击
 d.ext_aircv.click('tmp.jpg')
 d.ext_aircv.click('tmp.jpg', timeout=60)  # 设置超时时间
 
-
 # 原图像中指定查找范围，安卓以左上角为原点即（0,0）
 # 参数传入左上角坐标和右下角坐标(x1, y1, x2, y2)
 d.ext_aircv.click('tmp.jpg', area=(100, 100, 300, 200))
-
 
 # 长按
 d.ext_aircv.long_click('tmp.jpg')
@@ -113,28 +110,24 @@ d.ext_aircv.long_click('tmp.jpg', duration=5)  # 设置长按时间
 d.ext_aircv.long_click('tmp.jpg', timeout=60)  # 设置超时时间
 d.ext_aircv.long_click('tmp.jpg', area=(100, 100, 300, 200))  # 设置查找范围
 
-
 # 滑动
 d.ext_aircv.swipe('tmp1.jpg', 'tmp2.jpg')
 
-#设置持续时间，0.1 表示持续 1秒， 默认 1秒
+# 设置持续时间，0.1 表示持续 1秒， 默认 1秒
 d.ext_aircv.swipe('tmp1.jpg', 'tmp2.jpg', duration=0.1)
 d.ext_aircv.swipe('tmp1.jpg', 'tmp2.jpg', timeout=60)  # 设置超时时间
 d.ext_aircv.swipe('tmp1.jpg', 'tmp2.jpg', area=(100, 100, 300, 200))  # 设置查找范围
-
 
 # 多点滑动
 # duration 的值， 0.1 表示持续 1秒， 默认 1秒
 img_list = ['tmp1.jpg', 'tmp2.jpg', 'tmp3.jpg']
 d.ext_aircv.swipe_points(img_list, duration=0.5, timeout=60)
 
-
 # 拖动（按住一会再滑动）
 d.ext_aircv.drag('tmp1.jpg', 'tmp2.jpg', duration=0.1, timeout=60)
 d.ext_aircv.drag('tmp1.jpg', 'tmp2.jpg', area=(100, 100, 300, 200))  # 设置查找范围
 
-
 # 获取坐标(x, y)（返回查找到图像的中心坐标）
-d.ext_aircv.get_point('tmp1.jpg', timeout=60, area=(100, 100, 300, 200)) 
+d.ext_aircv.get_point('tmp1.jpg', timeout=60, area=(100, 100, 300, 200))
 
 ```

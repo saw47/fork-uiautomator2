@@ -4,7 +4,7 @@
 # But is seems fine, because these operation have so many socket IO
 # So  it seems no need to use multiprocess
 #
-import uiautomator2 as u2
+import uiautomator2f as u2
 import adbutils
 import threading
 from logzero import logger

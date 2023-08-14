@@ -258,7 +258,7 @@ class _BaseClient(object):
         formatter = logzero.LogFormatter(fmt=log_format)
         self._logger = setup_logger(name="uiautomator2f.client", level=logging.DEBUG, formatter=formatter)
         
-        filelock_path = os.path.expanduser("~/.uiautomator2/filelocks/") + base64.urlsafe_b64encode(self._serial.encode('utf-8')).decode('utf-8') + ".lock"
+        filelock_path = os.path.expanduser("~/.uiautomator2f/filelocks/") + base64.urlsafe_b64encode(self._serial.encode('utf-8')).decode('utf-8') + ".lock"
         os.makedirs(os.path.dirname(filelock_path), exist_ok=True)
         self._filelock = filelock.FileLock(filelock_path, timeout=200)
 
@@ -329,7 +329,7 @@ class _BaseClient(object):
         # check running
         self._kill_process_by_name("atx-agent", use_adb=True)
 
-        from uiautomator2 import init
+        from uiautomator2f import init
         _initer = init.Initer(self._adb_device)
         _initer.setup_atx_agent()
 
@@ -1838,17 +1838,17 @@ class _PluginMixIn:
 
     @cached_property
     def image(self):
-        from uiautomator2 import image as _image
+        from uiautomator2f import image as _image
         return _image.ImageX(self)
 
     @cached_property
     def screenrecord(self):
-        from uiautomator2 import screenrecord as _sr
+        from uiautomator2f import screenrecord as _sr
         return _sr.Screenrecord(self)
 
     @cached_property
     def widget(self):
-        from uiautomator2.widget import Widget
+        from uiautomator2f.widget import Widget
         return Widget(self)
 
     @cached_property

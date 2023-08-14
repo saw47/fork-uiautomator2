@@ -4,7 +4,7 @@
 import time
 import threading
 import pytest
-from uiautomator2 import utils
+from uiautomator2f import utils
 
 def test_list2cmdline():
     testdata = [

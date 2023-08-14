@@ -12,9 +12,9 @@ import requests
 from logzero import logger, setup_logger
 from lxml import etree
 
-import uiautomator2 as u2
-import uiautomator2.image as uim
-from uiautomator2.image import compare_ssim, draw_point, imread
+import uiautomator2f as u2
+import uiautomator2f.image as uim
+from uiautomator2f.image import compare_ssim, draw_point, imread
 
 
 def xml2nodes(xml_content: Union[str, bytes]):

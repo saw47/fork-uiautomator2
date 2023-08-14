@@ -5,7 +5,7 @@
 # OPPO need password
 
 import time
-import uiautomator2 as u2
+import uiautomator2f as u2
 
 
 def oppo_verify(u):

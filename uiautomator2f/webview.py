@@ -186,7 +186,7 @@ def test_self_driver():
 
 
 def runtest():
-    import uiautomator2 as u2
+    import uiautomator2f as u2
 
     d = u2.connect_usb()
     pprint(d.request_agent("/webviews").json())
@@ -203,7 +203,7 @@ def main():
     args = parser.parse_args()
 
     # WebviewDriver()
-    import uiautomator2 as u2
+    import uiautomator2f as u2
 
     d = u2.connect_usb()
     assert d._adb_device, "must connect with usb"

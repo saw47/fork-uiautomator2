@@ -38,30 +38,31 @@ pip3 install -U uiautomator2
 看下面的这个简单的例子了解下如何使用
 
 ```python
-import uiautomator2 as u2
+import uiautomator2f as u2
+
 
 def main():
     d = u2.connect()
     d.app_start("com.netease.cloudmusic", stop=True)
 
     d.xpath('//*[@text="私人FM"]').click()
-    
+
     #
     # 高级用法(元素定位)
     #
 
     # @开头
-    d.xpath('@personal-fm') # 等价于 d.xpath('//*[@resource-id="personal-fm"]')
+    d.xpath('@personal-fm')  # 等价于 d.xpath('//*[@resource-id="personal-fm"]')
     # 多个条件定位, 类似于AND
     d.xpath('//android.widget.Button').xpath('//*[@text="私人FM"]')
-    
-    d.xpath('//*[@text="私人FM"]').parent() # 定位到父元素
-    d.xpath('//*[@text="私人FM"]').parent("@android:list") # 定位到符合条件的父元素
 
-	# 包含child的时候，不建议在使用多条件的xpath，因为容易搞混
-	d.xpath('@android:id/list').child('/android.widget.TextView').click()
-	# 等价于下面这个
-	# d.xpath('//*[@resource-id="android:id/list"]/android.widget.TextView').click()
+    d.xpath('//*[@text="私人FM"]').parent()  # 定位到父元素
+    d.xpath('//*[@text="私人FM"]').parent("@android:list")  # 定位到符合条件的父元素
+
+    # 包含child的时候，不建议在使用多条件的xpath，因为容易搞混
+    d.xpath('@android:id/list').child('/android.widget.TextView').click()
+# 等价于下面这个
+# d.xpath('//*[@resource-id="android:id/list"]/android.widget.TextView').click()
 ```
 
 >下面的代码为了方便就不写`import`和`main`了，默认存在`d`这个变量
@@ -154,12 +155,12 @@ el.swipe("right", scale=0.9) # scale默认0.9, 意思是滑动距离为控件宽
 先看例子
 
 ```python
-from uiautomator2 import connect_usb, Direction
+from uiautomator2f import connect_usb, Direction
 
 d = connect_usb()
 
 d.scroll_to("下单")
-d.scroll_to("下单", Direction.FORWARD) # 默认就是向下滑动，除此之外还可以BACKWARD, HORIZ_FORWARD(水平), HORIZ_BACKWARD(水平反向)
+d.scroll_to("下单", Direction.FORWARD)  # 默认就是向下滑动，除此之外还可以BACKWARD, HORIZ_FORWARD(水平), HORIZ_BACKWARD(水平反向)
 d.scroll_to("下单", Direction.HORIZ_FORWARD, max_swipes=5)
 
 # 除此之外还可以在指定在某个元素内滑动
@@ -170,8 +171,9 @@ d.xpath('@com.taobao.taobao:id/dx_root').scroll_to("下单", Direction.HORIZ_FOR
 **比较完整的例子**
 
 ```python
-import uiautomator2 as u2
-from uiautomator2 import Direction
+import uiautomator2f as u2
+from uiautomator2f import Direction
+
 
 def main():
     d = u2.connect()
@@ -184,40 +186,40 @@ def main():
     # 监控弹窗2s钟，时间可能大于2s
     d.xpath.sleep_watch(2)
     d.xpath("转到上一层级").click()
-    
-    d.xpath("转到上一层级").click(watch=False) # click without trigger watch
-    d.xpath("转到上一层级").click(timeout=5.0) # wait timeout 5s
 
-    d.xpath.watch_background() # 开启后台监控模式，默认每4s检查一次
-    d.xpath.watch_background(interval=2.0) # 每2s检查一次
-    d.xpath.watch_stop() # 停止监控
+    d.xpath("转到上一层级").click(watch=False)  # click without trigger watch
+    d.xpath("转到上一层级").click(timeout=5.0)  # wait timeout 5s
+
+    d.xpath.watch_background()  # 开启后台监控模式，默认每4s检查一次
+    d.xpath.watch_background(interval=2.0)  # 每2s检查一次
+    d.xpath.watch_stop()  # 停止监控
 
     for el in d.xpath('//android.widget.EditText').all():
-        print("rect:", el.rect) # output tuple: (left_x, top_y, width, height)
-        print("bounds:", el.bounds) # output tuple: （left, top, right, bottom)
+        print("rect:", el.rect)  # output tuple: (left_x, top_y, width, height)
+        print("bounds:", el.bounds)  # output tuple: （left, top, right, bottom)
         print("center:", el.center())
-        el.click() # click operation
-        print(el.elem) # 输出lxml解析出来的Node
-    
+        el.click()  # click operation
+        print(el.elem)  # 输出lxml解析出来的Node
+
     # 滑动
     el = d.xpath('@com.taobao.taobao:id/fl_banner_container').get()
 
     # 从右滑到左
-    el.swipe(Direction.HORIZ_FORWARD) 
-    el.swipe(Direction.LEFT) # 从右滑到左
+    el.swipe(Direction.HORIZ_FORWARD)
+    el.swipe(Direction.LEFT)  # 从右滑到左
 
     # 从下滑到上
     el.swipe(Direction.FORWARD)
     el.swipe(Direction.UP)
 
-    el.swipe("right", scale=0.9) # scale 默认0.9, 滑动距离为控件宽度的80%, 滑动的中心点与控件中心点一致
-    el.swipe("up", scale=0.5) # 滑动距离为控件高度的50%
+    el.swipe("right", scale=0.9)  # scale 默认0.9, 滑动距离为控件宽度的80%, 滑动的中心点与控件中心点一致
+    el.swipe("up", scale=0.5)  # 滑动距离为控件高度的50%
 
     # scroll同swipe不一样，scroll返回bool值，表示是否还有新元素出现
-    el.scroll(Direction.FORWARD) # 向下滑动
-    el.scroll(Direction.BACKWARD) # 向上滑动
-    el.scroll(Direction.HORIZ_FORWARD) # 水平向前
-    el.scroll(Direction.HORIZ_BACKWARD) # 水平向后
+    el.scroll(Direction.FORWARD)  # 向下滑动
+    el.scroll(Direction.BACKWARD)  # 向上滑动
+    el.scroll(Direction.HORIZ_FORWARD)  # 水平向前
+    el.scroll(Direction.HORIZ_BACKWARD)  # 水平向后
 
     if el.scroll("forward"):
         print("还可以继续滚动")

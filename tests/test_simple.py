@@ -8,7 +8,7 @@ import unittest
 
 import pytest
 
-import uiautomator2 as u2
+import uiautomator2f as u2
 
 
 @pytest.mark.skip("not working")

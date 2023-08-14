@@ -5,9 +5,8 @@ Demo code
 ```python
 # coding: utf-8
 
-import uiautomator2 as u2
-import uiautomator2.ext.htmlreport as htmlreport
-
+import uiautomator2f as u2
+import uiautomator2f.ext.htmlreport as htmlreport
 
 u = u2.connect()
 hrp = htmlreport.HTMLReport(u)
@@ -17,7 +16,7 @@ hrp.patch_click()
 
 u.click(0.4, 0.6)
 u.click(0.4, 0.5)
-u(text="Github").click() # will also record
+u(text="Github").click()  # will also record
 ```
 
 ## Screenshot

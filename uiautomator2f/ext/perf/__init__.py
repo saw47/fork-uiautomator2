@@ -296,7 +296,7 @@ class Perf(object):
         import matplotlib.ticker as ticker
         import datetime
         import os
-        from uiautomator2.utils import natualsize
+        from uiautomator2f.utils import natualsize
 
         src = src or self.csv_output
         if not os.path.exists(target_dir):
@@ -355,7 +355,7 @@ class Perf(object):
 
 
 if __name__ == '__main__':
-    import uiautomator2 as u2
+    import uiautomator2f as u2
     pkgname = "com.tencent.tmgp.sgame"
     # pkgname = "com.netease.cloudmusic"
     u2.plugin_register('perf', Perf, pkgname)

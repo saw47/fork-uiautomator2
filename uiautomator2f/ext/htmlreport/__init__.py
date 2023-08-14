@@ -11,7 +11,7 @@ import shutil
 import sys
 import time
 import types
-import uiautomator2
+import uiautomator2f
 from PIL import ImageDraw
 
 
@@ -158,13 +158,13 @@ class HTMLReport(object):
             self._record_screenshot((x, y))  # write image and record.json
             return obj.long_click.oldfunc(obj, x, y, duration)
 
-        self._patch_class_func(uiautomator2.Session, 'click', _mock_click)
-        self._patch_class_func(uiautomator2.Session, 'long_click',
+        self._patch_class_func(uiautomator2f.Session, 'click', _mock_click)
+        self._patch_class_func(uiautomator2f.Session, 'long_click',
                                _mock_long_click)
 
     def unpatch_click(self):
         """
         Remove record for click operation
         """
-        self._unpatch_func(uiautomator2.Session, 'click')
-        self._unpatch_func(uiautomator2.Session, 'long_click')
+        self._unpatch_func(uiautomator2f.Session, 'click')
+        self._unpatch_func(uiautomator2f.Session, 'long_click')

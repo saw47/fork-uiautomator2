@@ -19,7 +19,7 @@ How it works.
 Use adbkit to trace device. And the following command will call when device plugin
 
 ```bash
-python -m uiautomator2 init --server $SERVER_ADDR
+python -m uiautomator2f init --server $SERVER_ADDR
 ```
 
 ## LICENSE

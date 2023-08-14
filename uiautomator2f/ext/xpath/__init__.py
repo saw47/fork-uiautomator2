@@ -2,7 +2,7 @@
 #
 
 import warnings
-from uiautomator2.xpath import *
+from uiautomator2f.xpath import *
 
 warnings.simplefilter("always", DeprecationWarning)
 

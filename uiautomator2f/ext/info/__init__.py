@@ -3,8 +3,8 @@ import os
 import datetime
 import atexit
 
-from uiautomator2 import UIAutomatorServer
-from uiautomator2.ext.info import conf
+from uiautomator2f import UIAutomatorServer
+from uiautomator2f.ext.info import conf
 
 
 class Info(object):

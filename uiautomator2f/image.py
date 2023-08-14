@@ -21,7 +21,7 @@ from logzero import setup_logger
 from PIL import Image, ImageDraw
 from skimage.metrics import structural_similarity
 
-import uiautomator2
+import uiautomator2f
 
 ImageType = typing.Union[np.ndarray, Image.Image]
 

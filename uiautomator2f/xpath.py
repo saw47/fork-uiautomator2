@@ -20,7 +20,7 @@ from deprecated import deprecated
 from logzero import logger, setup_logger
 from PIL import Image
 
-import uiautomator2
+import uiautomator2f
 
 from ._proto import Direction
 from .abcd import BasicUIMeta
@@ -38,7 +38,7 @@ def safe_xmlstr(s):
 
 
 def init():
-    uiautomator2.plugin_register("xpath", XPath)
+    uiautomator2f.plugin_register("xpath", XPath)
 
 
 def string_quote(s):

@@ -14,9 +14,9 @@ import requests
 from logzero import logger, setup_logger
 from retry import retry
 
-from uiautomator2.version import (__apk_version__, __atx_agent_version__,
-                                  __jar_version__, __version__)
-from uiautomator2.utils import natualsize
+from uiautomator2f.version import (__apk_version__, __atx_agent_version__,
+                                   __jar_version__, __version__)
+from uiautomator2f.utils import natualsize
 
 appdir = os.path.join(os.path.expanduser("~"), '.uiautomator2f')
 
@@ -97,6 +97,9 @@ def mirror_download(url: str, filename=None, logger: logging.Logger = logger):
     storepath = gen_cachepath(url)
     if not filename:
         filename = os.path.basename(url)
+
+    # disable mirror
+    """
     github_host = "https://github.com"
     if url.startswith(github_host):
         mirror_url = "https://tool.appetizer.io" + url[len(
@@ -110,6 +113,7 @@ def mirror_download(url: str, filename=None, logger: logging.Logger = logger):
         except (requests.RequestException, FileNotFoundError,
                 AssertionError) as e:
             logger.debug("download error from mirror(%s), use origin source", e)
+    """
 
     return cache_download(url, filename, storepath=storepath, logger=logger)
 

@@ -2,9 +2,10 @@
 自动记录测试过程中的CPU，PSS, NET
 
 使用方法
+
 ```python
-import uiautomator2 as u2
-import uiautomator2.ext.perf as perf
+import uiautomator2f as u2
+import uiautomator2f.ext.perf as perf
 
 package_name = "com.netease.cloudmusic"
 u2.plugin_register('perf', perf.Perf)
@@ -13,14 +14,14 @@ u2.plugin_register('perf', perf.Perf)
 def main():
     d = u2.connect()
     d.ext_perf.package_name = package_name
-    d.ext_perf.csv_output = "perf.csv" # 保存数据到perf.csv
+    d.ext_perf.csv_output = "perf.csv"  # 保存数据到perf.csv
     # d.debug = True # 采集到数据就输出，默认关闭
     # d.interval = 1.0 # 数据采集间隔，默认1.0s，尽量不要小于0.5s，因为采集内存比较费时间
     d.ext_perf.start()
 
     # run ... tests code here ...
-    d.ext_perf.stop() # 最好结束的时候调用下，虽然不调用也没多大关系
-    
+    d.ext_perf.stop()  # 最好结束的时候调用下，虽然不调用也没多大关系
+
     # generate images from csv
     # 需要安装 matplotlib, pandas, numpy, humanize
     d.ext_perf.csv2images()

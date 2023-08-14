@@ -1,7 +1,7 @@
 # coding: utf-8
 #
 
-import uiautomator2 as u2
+import uiautomator2f as u2
 import pytest
 import logging
 import time

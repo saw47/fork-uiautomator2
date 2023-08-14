@@ -11,8 +11,8 @@ from typing import Optional
 
 from logzero import setup_logger
 
-import uiautomator2
-from uiautomator2.xpath import XPath
+import uiautomator2f
+from uiautomator2f.xpath import XPath
 
 from .utils import inject_call
 

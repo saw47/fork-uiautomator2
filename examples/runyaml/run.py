@@ -9,7 +9,7 @@ import argparse
 
 import yaml
 import bunch
-import uiautomator2 as u2
+import uiautomator2f as u2
 from logzero import logger
 
 

@@ -95,8 +95,8 @@ class OCRSelector(object):
 
 
 if __name__ == '__main__':
-    import uiautomator2.ext.ocr as ocr
-    import uiautomator2 as u2
+    import uiautomator2f.ext.ocr as ocr
+    import uiautomator2f as u2
 
     d = u2.connect()
     print(ocr.OCR(d)("王者峡谷").click())
