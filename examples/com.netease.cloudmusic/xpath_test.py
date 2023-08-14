@@ -4,7 +4,7 @@
 import unittest
 from logzero import logger
 
-import uiautomator2 as u2
+import uiautomator2f as u2
 
 # d = u2.connect_usb("3578298f")
 d = u2.connect_usb()

@@ -2,7 +2,7 @@
 #
 
 import time
-import uiautomator2 as u2
+import uiautomator2f as u2
 
 
 def test_swipe_duration(d: u2.Device):

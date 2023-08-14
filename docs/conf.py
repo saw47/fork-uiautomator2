@@ -12,16 +12,16 @@
 #
 #import os
 #import sys
-#sys.path.insert(0, os.path.abspath('../uiautomator2'))
+#sys.path.insert(0, os.path.abspath('../uiautomator2f'))
 
-import uiautomator2
+import uiautomator2f
 
 
 # -- Project information -----------------------------------------------------
 
 master_doc = 'index'
 
-project = 'uiautomator2'
+project = 'uiautomator2f'
 copyright = '2020, codeskyblue'
 author = 'codeskyblue'
 

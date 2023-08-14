@@ -50,9 +50,9 @@
 命令行运行`python`打开python交互窗口。然后将下面的命令输入到窗口中。
 
 ```python
-import uiautomator2 as u2
+import uiautomator2f as u2
 
-d = u2.connect() # connect to device
+d = u2.connect()  # connect to device
 print(d.info)
 ```
 
@@ -141,12 +141,12 @@ Thank you to all our sponsors! ✨🍰✨
 1. Install uiautomator2
 
     ```bash
-    # Since uiautomator2 is still under development, you have to add --pre to install the development version
-    pip install --upgrade --pre uiautomator2
+    # Since uiautomator2f is still under development, you have to add --pre to install the development version
+    pip install --upgrade --pre uiautomator2f
 
     # Or you can install directly from github source
     git clone https://github.com/openatx/uiautomator2
-    pip install -e uiautomator2
+    pip install -e uiautomator2f
     ```
     
     测试是否安装成功 `uiautomator2 --help`
@@ -175,11 +175,11 @@ Thank you to all our sponsors! ✨🍰✨
 
     ```bash
     # init 所有的已经连接到电脑的设备
-    python -m uiautomator2 init
+    python -m uiautomator2f init
 
     # 高阶用法
     # init and set atx-agent listen in all address
-    python -m uiautomator2 init --addr :7912
+    python -m uiautomator2f init --addr :7912
     ```
 
     有时候init也会出错，请参考[手动Init指南](https://github.com/openatx/uiautomator2/wiki/Manual-Init)
@@ -202,9 +202,9 @@ There are two ways to connect to the device.
 Suppose device IP is `10.0.0.1` and your PC is in the same network.
 
 ```python
-import uiautomator2 as u2
+import uiautomator2f as u2
 
-d = u2.connect('10.0.0.1') # alias for u2.connect_wifi('10.0.0.1')
+d = u2.connect('10.0.0.1')  # alias for u2.connect_wifi('10.0.0.1')
 print(d.info)
 ```
 
@@ -213,16 +213,16 @@ print(d.info)
 Suppose the device serial is `123456f` (seen from `adb devices`)
 
 ```python
-import uiautomator2 as u2
+import uiautomator2f as u2
 
-d = u2.connect('123456f') # alias for u2.connect_usb('123456f')
+d = u2.connect('123456f')  # alias for u2.connect_usb('123456f')
 print(d.info)
 ```
 
 3. **Through ADB WiFi**
 
 ```python
-import uiautomator2 as u2
+import uiautomator2f as u2
 
 d = u2.connect_adb_wifi("10.0.0.1:5555")
 
@@ -244,13 +244,13 @@ If this environment variable is empty, uiautomator will fall back to `connect_us
 - screenshot: 截图
 
     ```bash
-    $ uiautomator2 screenshot screenshot.jpg
+    $ uiautomator2f screenshot screenshot.jpg
     ```
 
 - current: 获取当前包名和activity
 
     ```bash
-    $ uiautomator2 current
+    $ uiautomator2f current
     {
         "package": "com.android.browser",
         "activity": "com.uc.browser.InnerUCMobile",
@@ -261,16 +261,16 @@ If this environment variable is empty, uiautomator will fall back to `connect_us
 - uninstall： 卸载
 
     ```bash
-    $ uiautomator2 uninstall <package-name> # 卸载一个包
-    $ uiautomator2 uninstall <package-name-1> <package-name-2> # 卸载多个包
-    $ uiautomator2 uninstall --all # 全部卸载
+    $ uiautomator2f uninstall <package-name> # 卸载一个包
+    $ uiautomator2f uninstall <package-name-1> <package-name-2> # 卸载多个包
+    $ uiautomator2f uninstall --all # 全部卸载
     ```
 
 - stop: 停止应用
 
     ```bash
-    $ uiautomator2 stop com.example.app # 停止一个app
-    $ uiautomator2 stop --all # 停止所有的app
+    $ uiautomator2f stop com.example.app # 停止一个app
+    $ uiautomator2f stop --all # 停止所有的app
     ```
     
 - install: 安装apk，apk通过URL给出 (暂时不能用)
@@ -279,8 +279,8 @@ If this environment variable is empty, uiautomator will fall back to `connect_us
 - doctor: 检查uiautomator2无法使用的原因
 
     ```bash
-    $ uiautomator2 doctor
-    I 210519 16:48:45 init:156] uiautomator2 version: 2.14.2.dev1
+    $ uiautomator2f doctor
+    I 210519 16:48:45 init:156] uiautomator2f version: 2.14.2.dev1
     [D 210519 16:48:45 __main__:105] sdk:29 abi:arm64-v8a
     CHECK atx-agent
             GOOD: atx-agent version 0.10.0
@@ -767,7 +767,7 @@ You can find all key code definitions at [Android KeyEvnet](https://developer.an
 	d.swipe_ext("up", scale=0.8) # 代码会vkk
 
     # 还可以使用Direction作为参数
-    from uiautomator2 import Direction
+    from uiautomator2f import Direction
     
     d.swipe_ext(Direction.FORWARD) # 页面下翻, 等价于 d.swipe_ext("up"), 只是更好理解
     d.swipe_ext(Direction.BACKWARD) # 页面上翻
@@ -1304,7 +1304,7 @@ d.watcher.stop()
 d.watcher.reset()
 ```
 
-另外文档还是有很多没有写，推荐直接去看源码[watcher.py](uiautomator2/watcher.py)
+另外文档还是有很多没有写，推荐直接去看源码[watcher.py](uiautomator2f/watcher.py)
 
 ### Global settings
 

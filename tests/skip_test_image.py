@@ -8,7 +8,7 @@ import numpy as np
 import pytest
 from PIL import Image
 
-import uiautomator2.image as u2image
+import uiautomator2f.image as u2image
 
 TESTDIR = os.path.dirname(os.path.abspath(__file__)) + "/testdata" # if set to DIR__, pytest will fail with TypeError: 'str' object is not callable
 

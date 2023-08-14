@@ -3,7 +3,7 @@
 
 import os
 import io
-import uiautomator2 as u2
+import uiautomator2f as u2
 
 
 def test_push_and_pull(d: u2.Device):
