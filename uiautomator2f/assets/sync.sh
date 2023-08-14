@@ -17,9 +17,11 @@ cd "$(dirname $0)"
 function download(){
 	VERSION=$1
 	NAME=$2
-	URL="https://github.com/openatx/android-uiautomator-server/releases/download/$VERSION/$NAME"
-	echo "$URL"
-	curl -L "$URL" --output "$NAME"
+	# URL="https://github.com/open-atx/android-uiautomator-server/releases/download/$VERSION/$NAME"
+	URL_FORK="https://github.com/saw47/fork-android-uiautomator-server/releases/download/$VERSION/$NAME"
+	U=$URL_FORK
+	echo "$U"
+	curl -L "$U" --output "$NAME"
 }
 
 download "$APK_VERSION" "app-uiautomator.apk"
