@@ -96,6 +96,9 @@ def mirror_download(url: str, filename=None, logger: logging.Logger = logger):
     storepath = gen_cachepath(url)
     if not filename:
         filename = os.path.basename(url)
+
+    # disable mirror
+    """
     github_host = "https://github.com"
     if url.startswith(github_host):
         mirror_url = "https://tool.appetizer.io" + url[len(
@@ -109,6 +112,7 @@ def mirror_download(url: str, filename=None, logger: logging.Logger = logger):
         except (requests.RequestException, FileNotFoundError,
                 AssertionError) as e:
             logger.debug("download error from mirror(%s), use origin source", e)
+    """
 
     return cache_download(url, filename, storepath=storepath, logger=logger)
 
