@@ -18,7 +18,7 @@ from uiautomator2.version import (__apk_version__, __atx_agent_version__,
                                   __jar_version__, __version__)
 from uiautomator2.utils import natualsize
 
-appdir = os.path.join(os.path.expanduser("~"), '.fork-uiautomator2')
+appdir = os.path.join(os.path.expanduser("~"), '.uiautomator2f')
 
 GITHUB_BASEURL = "https://github.com/openatx"
 
@@ -155,7 +155,7 @@ class Initer():
         self.__atx_listen_addr = "127.0.0.1:7912"
         self.logger = setup_logger(level=loglevel)
         # self.logger.debug("Initial device %s", device)
-        self.logger.info("fork-uiautomator2 version: %s", __version__)
+        self.logger.info("uiautomator2f version: %s", __version__)
 
     def set_atx_agent_addr(self, addr: str):
         assert ":" in addr

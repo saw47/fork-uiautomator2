@@ -114,10 +114,10 @@ class UIMeta(metaclass=abc.ABCMeta):
 
 
 class XPath(object):
-    def __init__(self, d: "fork-uiautomator2.Device"):
+    def __init__(self, d: "uiautomator2f.Device"):
         """
         Args:
-            d (fork-uiautomator2 instance)
+            d (uiautomator2f instance)
         """
         self._d = d
         assert hasattr(d, "click")
@@ -632,7 +632,7 @@ class XMLElement(object):
         """
         Args:
             elem: lxml node
-            d: fork-uiautomator2 instance
+            d: uiautomator2f instance
         """
         self.elem = elem
         self._parent = parent
@@ -911,9 +911,9 @@ if __name__ == "__main__":
     xpath("App").click()
     xpath("Alarm").click()
     # init()
-    # import fork-uiautomator2.ext.htmlreport as htmlreport
+    # import uiautomator2f.ext.htmlreport as htmlreport
 
-    # d = fork-uiautomator2.connect()
+    # d = uiautomator2f.connect()
     # hrp = htmlreport.HTMLReport(d)
 
     # # take screenshot before each click

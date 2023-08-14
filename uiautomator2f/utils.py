@@ -167,7 +167,7 @@ def natualsize(size: int):
         return '{:.1f} KB'.format(size / _KB)
 
 
-def swipe_in_bounds(d: "fork-uiautomator2.Device",
+def swipe_in_bounds(d: "uiautomator2f.Device",
                     bounds: list,
                     direction: Union[Direction, str],
                     scale: float = 0.6):
@@ -227,7 +227,7 @@ def process_safe_wrapper(fn: typing.Callable[..., typing.Any]) -> typing.Callabl
     """
     threadsafe for process calls
     """
-    lockfile_path = os.path.expanduser("~/.fork-uiautomator2/" + fn.__name__ + ".lock")
+    lockfile_path = os.path.expanduser("~/.uiautomator2f/" + fn.__name__ + ".lock")
     flock = filelock.FileLock(lockfile_path, timeout=120) # default timeout
 
     @functools.wraps(fn)

@@ -218,10 +218,10 @@ def imread(data) -> np.ndarray:
 
 
 class ImageX(object):
-    def __init__(self, d: "fork-uiautomator2.Device"):
+    def __init__(self, d: "uiautomator2f.Device"):
         """
         Args:
-            d (fork-uiautomator2 instance)
+            d (uiautomator2f instance)
         """
         self.logger = setup_logger()
         self._d = d
@@ -326,7 +326,7 @@ def _main():
 if __name__ == "__main__":
     _main()
 
-    # import fork-uiautomator2 as u2
+    # import uiautomator2f as u2
     # d = u2.connect()
     # bg = d.screenshot(format="opencv")
     # res = fi.find("target", target_pic_object=bg)
