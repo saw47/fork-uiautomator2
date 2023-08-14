@@ -27,4 +27,5 @@ function download(){
 download "$APK_VERSION" "app-uiautomator.apk"
 download "$APK_VERSION" "app-uiautomator-test.apk"
 
-unzip -tq app-uiautomator.apk && echo "$APK_VERSION" > apk_version.txt
+unzip -tq app-uiautomator.apk
+echo "$APK_VERSION" > apk_version.txt
