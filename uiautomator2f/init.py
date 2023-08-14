@@ -15,13 +15,14 @@ from logzero import logger, setup_logger
 from retry import retry
 
 from uiautomator2f.version import (__apk_version__, __atx_agent_version__,
-                                   __jar_version__, __version__)
+                                   __jar_version__, __version__, __atx_agent_version_fork__)
 from uiautomator2f.utils import natualsize
 
 appdir = os.path.join(os.path.expanduser("~"), '.uiautomator2f')
 
 GITHUB_BASEURL = "https://github.com/openatx"
 GITHUB_FORK_URL = "https://github.com/saw47"
+
 
 class DownloadBar(progress.bar.PixelBar):
     message = "Downloading"
@@ -188,11 +189,11 @@ class Initer():
     @property
     def atx_agent_url(self):
         files = {
-            'armeabi-v7a': 'atx-agent_{v}_linux_armv7.tar.gz',
-            'arm64-v8a': 'atx-agent_{v}_linux_arm64.tar.gz',
-            'armeabi': 'atx-agent_{v}_linux_armv6.tar.gz',
-            'x86': 'atx-agent_{v}_linux_386.tar.gz',
-            'x86_64': 'atx-agent_{v}_linux_386.tar.gz',
+            'armeabi-v7a': 'fork-atx-agent_{v}_linux_armv7.tar.gz',
+            'arm64-v8a': 'fork-atx-agent_{v}_linux_arm64.tar.gz',
+            'armeabi': 'fork-atx-agent_{v}_linux_armv6.tar.gz',
+            'x86': 'fork-atx-agent_{v}_linux_386.tar.gz',
+            'x86_64': 'fork-atx-agent_{v}_linux_386.tar.gz',
         }
         name = None
         for abi in self.abis:
@@ -203,8 +204,9 @@ class Initer():
             raise Exception(
                 "arch(%s) need to be supported yet, please report an issue in github"
                 % self.abis)
-        return GITHUB_BASEURL + f'/atx-agent/releases/download/%s/%s' % (
-            __atx_agent_version__, name.format(v=__atx_agent_version__))
+
+        return GITHUB_FORK_URL+f'/fork-atx-agent/releases/download/%s/%s' % (__atx_agent_version_fork__,
+                                                                             name.format(v=__atx_agent_version_fork__))
 
     @property
     def minicap_urls(self):
@@ -342,15 +344,17 @@ class Initer():
             self.push_url(url, "/data/local/tmp/" + name, mode=0o644)
 
     def _install_atx_agent(self):
-        self.logger.info("Install atx-agent %s", __atx_agent_version__)
-        self.push_url(self.atx_agent_url, tgz=True, extract_name="atx-agent")
+        self.logger.info("Install atx-agent %s", __atx_agent_version_fork__)
+        self.push_url(self.atx_agent_url, tgz=True, extract_name="fork-atx-agent")
+        self.shell("mv", "data/local/tmp/fork-atx-agent", "data/local/tmp/atx-agent")
 
     def setup_atx_agent(self):
         # stop atx-agent first
         self.shell(self.atx_agent_path, "server", "--stop")
         if self.is_atx_agent_outdated():
-            self.logger.info("Install atx-agent %s", __atx_agent_version__)
-            self.push_url(self.atx_agent_url, tgz=True, extract_name="atx-agent")
+            self.logger.info("Install atx-agent %s", __atx_agent_version_fork__)
+            self.push_url(self.atx_agent_url, tgz=True, extract_name="fork-atx-agent")
+            self.shell("mv", "data/local/tmp/fork-atx-agent", "data/local/tmp/atx-agent")
 
         self.shell(self.atx_agent_path, 'server', '--nouia', '-d', "--addr", self.__atx_listen_addr)
         self.logger.info("Check atx-agent version")
